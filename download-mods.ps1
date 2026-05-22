@@ -22,7 +22,8 @@ function Write-Header { param($m) Write-Host "`n--- $m ---" -ForegroundColor Blu
 
 function Get-ModrinthFile {
     param($slug, $outDir)
-    $mrUri = "https://api.modrinth.com/v2/project/$slug/version" + "?game_versions=%5B%22$MC_VERSION%22%5D&loaders=%5B%22fabric%22%5D"
+    $encodedSlug = [System.Uri]::EscapeDataString($slug)
+    $mrUri = "https://api.modrinth.com/v2/project/$encodedSlug/version" + "?game_versions=%5B%22$MC_VERSION%22%5D&loaders=%5B%22fabric%22%5D"
     $versions = Invoke-RestMethod -Uri $mrUri -ErrorAction Stop
     if (-not $versions -or $versions.Count -eq 0) { return $null }
     $latest = $versions | Sort-Object { [datetime]$_.date_published } -Descending | Select-Object -First 1
@@ -137,7 +138,7 @@ foreach ($url in $lines) {
             # Some authors disable API downloads - fall back to CDN URL
             if (-not $dlUrl) {
                 $id    = [int]$file.id
-                $dlUrl = "https://mediafilez.forgecdn.net/files/" + [int]($id / 1000) + "/" + ($id % 1000) + "/$fileName"
+                $dlUrl = "https://mediafilez.forgecdn.net/files/" + [int]($id / 1000) + "/" + ($id % 1000).ToString("D3") + "/$fileName"
             }
 
             # 4. Download - fall back to Modrinth on 403
@@ -215,6 +216,6 @@ if ($failed.Count -eq 0) {
 
 Write-Host ""
 Write-Host "  Mods saved to: $MODS_DIR" -ForegroundColor Cyan
-Write-Host "  Run sync-mods.ps1 when ready to push to the server." -ForegroundColor Cyan
+Write-Host "  Launch Minecraft and enjoy!" -ForegroundColor Cyan
 Write-Host ""
 Read-Host "Press Enter to exit"
