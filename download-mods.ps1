@@ -10,7 +10,7 @@ param([switch]$Test)
 
 # --- Config ------------------------------------------------------------------
 $MC_VERSION = "26.1.2"
-$MODS_DIR   = if ($Test) { Join-Path $PSScriptRoot "test-output" } else { "C:\Users\wbgui\AppData\Roaming\.minecraft\mods" }
+$MODS_DIR   = if ($Test) { Join-Path $PSScriptRoot "test-output" } else { "$env:APPDATA\.minecraft\mods" }
 $MODLIST    = Join-Path $PSScriptRoot "modlist.txt"
 # -----------------------------------------------------------------------------
 
