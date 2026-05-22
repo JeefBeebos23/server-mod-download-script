@@ -36,7 +36,6 @@ https://www.curseforge.com/minecraft/mc-mods/animal-pens
 https://www.curseforge.com/minecraft/mc-mods/darkspins
 https://www.curseforge.com/minecraft/mc-mods/more-mc-music-discs
 https://www.curseforge.com/minecraft/mc-mods/sheep-squeak
-https://www.curseforge.com/minecraft/mc-mods/simple-uncrafting-table-fabric
 https://www.curseforge.com/minecraft/mc-mods/death-finder
 https://www.curseforge.com/minecraft/mc-mods/naturally-trimmed
 https://www.curseforge.com/minecraft/mc-mods/explosive-enhancement
@@ -51,14 +50,12 @@ https://www.curseforge.com/minecraft/mc-mods/nords-leaf-me-alone
 https://www.curseforge.com/minecraft/mc-mods/legacies-and-legends
 https://www.curseforge.com/minecraft/mc-mods/useless-reptile
 https://www.curseforge.com/minecraft/mc-mods/ohmymeteors
-https://www.curseforge.com/minecraft/mc-mods/nether-wart-block-to-nether-warts
 https://www.curseforge.com/minecraft/mc-mods/infinity-water-bucket
 https://www.curseforge.com/minecraft/mc-mods/exp-ore
 https://www.curseforge.com/minecraft/mc-mods/giant-cherry-blossom-bonsai-tree
 https://www.curseforge.com/minecraft/mc-mods/patpat
 https://modrinth.com/mod/echoes-of-the-end-(-structures)
 https://modrinth.com/mod/rotten-flesh-smelt-to-leather
-https://www.curseforge.com/minecraft/mc-mods/item-alchemy-fabric
 https://www.curseforge.com/minecraft/mc-mods/serversleep
 https://www.curseforge.com/minecraft/mc-mods/big-lost-city
 https://www.curseforge.com/minecraft/mc-mods/inventory-mending
@@ -90,7 +87,6 @@ https://www.curseforge.com/minecraft/mc-mods/puzzles-lib
 https://www.curseforge.com/minecraft/mc-mods/forge-config-api-port
 https://www.curseforge.com/minecraft/mc-mods/cloth-config
 https://www.curseforge.com/minecraft/mc-mods/bucketlib
-https://modrinth.com/mod/mcpitanlibarch
 # all-the-trims removed - abandoned at 1.21, no 26.1.2 version exists
 https://www.curseforge.com/minecraft/mc-mods/lithostitched
 https://www.curseforge.com/minecraft/mc-mods/trim-patcher
@@ -98,5 +94,4 @@ https://www.curseforge.com/minecraft/mc-mods/item-tooltips
 https://www.curseforge.com/minecraft/mc-mods/unified-api
 https://www.curseforge.com/minecraft/mc-mods/yacl
 https://www.curseforge.com/minecraft/mc-mods/particleanimationlib
-https://www.curseforge.com/minecraft/mc-mods/anvilcore
 https://www.curseforge.com/minecraft/mc-mods/collective
