@@ -7,7 +7,6 @@
 # =============================================================================
 
 # --- Config ------------------------------------------------------------------
-$CF_API_KEY = "YOUR_API_KEY_HERE"   # <-- paste your CurseForge API key here
 $MC_VERSION = "26.1.2"
 $MODS_DIR   = "C:\Users\wbgui\AppData\Roaming\.minecraft\mods"
 $MODLIST    = Join-Path $PSScriptRoot "modlist.txt"
@@ -26,10 +25,13 @@ Write-Host "   Minecraft Mod Downloader — MC $MC_VERSION Fabric" -ForegroundCo
 Write-Host "  ================================================" -ForegroundColor Blue
 Write-Host ""
 
-# --- Validate config ---------------------------------------------------------
-if ($CF_API_KEY -eq "YOUR_API_KEY_HERE") {
-    Write-Err "No CurseForge API key set."
-    Write-Err "Get a free key at https://console.curseforge.com/ and paste it at the top of this script."
+# --- Get API key -------------------------------------------------------------
+Write-Host "  Get a free API key at: https://console.curseforge.com/" -ForegroundColor DarkGray
+Write-Host ""
+$CF_API_KEY = Read-Host "  Paste your CurseForge API key"
+$CF_API_KEY = $CF_API_KEY.Trim()
+if (-not $CF_API_KEY) {
+    Write-Err "No API key entered. Exiting."
     Read-Host "`nPress Enter to exit"
     exit 1
 }
