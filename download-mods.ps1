@@ -2,13 +2,15 @@
 #  download-mods.ps1 — Minecraft Mod Downloader
 #  Reads modlist.txt and downloads all mods into your local mods folder.
 #
-#  Usage:  .\download-mods.ps1
+#  Usage:  .\download-mods.ps1           (downloads to .minecraft\mods)
+#          .\download-mods.ps1 -Test     (downloads to .\test-output\ instead)
 #  Needs:  A free CurseForge API key → https://console.curseforge.com/
 # =============================================================================
+param([switch]$Test)
 
 # --- Config ------------------------------------------------------------------
 $MC_VERSION = "26.1.2"
-$MODS_DIR   = "C:\Users\wbgui\AppData\Roaming\.minecraft\mods"
+$MODS_DIR   = if ($Test) { Join-Path $PSScriptRoot "test-output" } else { "C:\Users\wbgui\AppData\Roaming\.minecraft\mods" }
 $MODLIST    = Join-Path $PSScriptRoot "modlist.txt"
 # -----------------------------------------------------------------------------
 
