@@ -78,7 +78,7 @@ https://github.com/JeefBeebos23/qol-mod/releases/latest/download/qolmod-1.1.0.ja
 # --- Dependencies (auto-added) ---
 https://www.curseforge.com/minecraft/mc-mods/searchables
 https://www.curseforge.com/minecraft/mc-mods/glitchcore
-https://www.curseforge.com/minecraft/mc-mods/terrablender
+https://modrinth.com/mod/terrablender
 https://www.curseforge.com/minecraft/mc-mods/balm
 https://www.curseforge.com/minecraft/mc-mods/cristel-lib
 https://www.curseforge.com/minecraft/mc-mods/framework
