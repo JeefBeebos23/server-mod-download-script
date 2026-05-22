@@ -27,7 +27,6 @@ https://www.curseforge.com/minecraft/mc-mods/laser-bridges-doors
 https://www.curseforge.com/minecraft/mc-mods/illager-warship
 https://www.curseforge.com/minecraft/mc-mods/horse-expert
 https://www.curseforge.com/minecraft/mc-mods/universal-ores-fabric
-https://www.curseforge.com/minecraft/mc-mods/ceramic-bucket
 https://www.curseforge.com/minecraft/mc-mods/fish-of-thieves
 https://www.curseforge.com/minecraft/mc-mods/no-telemetry
 https://www.curseforge.com/minecraft/mc-mods/pretty-beaches
@@ -50,7 +49,6 @@ https://www.curseforge.com/minecraft/mc-mods/nords-leaf-me-alone
 https://www.curseforge.com/minecraft/mc-mods/legacies-and-legends
 https://www.curseforge.com/minecraft/mc-mods/useless-reptile
 https://www.curseforge.com/minecraft/mc-mods/ohmymeteors
-https://www.curseforge.com/minecraft/mc-mods/infinity-water-bucket
 https://www.curseforge.com/minecraft/mc-mods/exp-ore
 https://www.curseforge.com/minecraft/mc-mods/giant-cherry-blossom-bonsai-tree
 https://www.curseforge.com/minecraft/mc-mods/patpat
@@ -86,7 +84,6 @@ https://www.curseforge.com/minecraft/mc-mods/deimos-fabric-forge-neoforge
 https://www.curseforge.com/minecraft/mc-mods/puzzles-lib
 https://www.curseforge.com/minecraft/mc-mods/forge-config-api-port
 https://www.curseforge.com/minecraft/mc-mods/cloth-config
-https://www.curseforge.com/minecraft/mc-mods/bucketlib
 # all-the-trims removed - abandoned at 1.21, no 26.1.2 version exists
 https://www.curseforge.com/minecraft/mc-mods/lithostitched
 https://www.curseforge.com/minecraft/mc-mods/trim-patcher
