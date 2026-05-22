@@ -1,0 +1,43 @@
+# =============================================================================
+# Minecraft Systemd Service
+# Automatically starts the server on boot and restarts it if it crashes.
+#
+# SETUP:
+#   sudo cp minecraft.service /etc/systemd/system/minecraft.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable minecraft
+#   sudo systemctl start minecraft
+#
+# Useful commands:
+#   sudo systemctl status minecraft     — check if running
+#   sudo systemctl stop minecraft       — graceful stop
+#   sudo systemctl restart minecraft    — restart
+#   journalctl -u minecraft -f          — tail the service log
+# =============================================================================
+
+[Unit]
+Description=Minecraft Fabric Server
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+User=minecraft
+Group=minecraft
+WorkingDirectory=/opt/minecraft
+Environment=SCREENDIR=/opt/minecraft/.screen
+ExecStart=/opt/minecraft/start.sh
+ExecStop=/usr/bin/screen -S minecraft -X stuff "save-all\r"
+ExecStop=/bin/sleep 10
+ExecStop=/usr/bin/screen -S minecraft -X stuff "stop\r"
+
+# Restart automatically if the process exits unexpectedly
+# (does NOT restart after a clean systemctl stop)
+Restart=on-failure
+RestartSec=30
+
+# Give the server up to 2 minutes to shut down cleanly
+TimeoutStopSec=120
+
+[Install]
+WantedBy=multi-user.target
