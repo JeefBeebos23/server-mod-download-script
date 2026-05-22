@@ -20,6 +20,19 @@ function Write-Err    { param($m) Write-Host "  [XX] $m" -ForegroundColor Red }
 function Write-Info   { param($m) Write-Host "  [..] $m" -ForegroundColor Cyan }
 function Write-Header { param($m) Write-Host "`n--- $m ---" -ForegroundColor Blue }
 
+function Download-FromModrinth {
+    param($slug, $outDir)
+    $mrUri = "https://api.modrinth.com/v2/project/$slug/version" + "?game_versions=%5B%22$MC_VERSION%22%5D&loaders=%5B%22fabric%22%5D"
+    $versions = Invoke-RestMethod -Uri $mrUri -ErrorAction Stop
+    if (-not $versions -or $versions.Count -eq 0) { return $null }
+    $latest = $versions | Sort-Object { [datetime]$_.date_published } -Descending | Select-Object -First 1
+    $file = $latest.files | Where-Object { $_.primary } | Select-Object -First 1
+    if (-not $file) { $file = $latest.files | Select-Object -First 1 }
+    $outPath = Join-Path $outDir $file.filename
+    Invoke-WebRequest -Uri $file.url -OutFile $outPath -ErrorAction Stop
+    return $file.filename
+}
+
 Clear-Host
 Write-Host ""
 Write-Host "  ================================================" -ForegroundColor Blue
@@ -86,8 +99,12 @@ foreach ($url in $lines) {
             $search = Invoke-RestMethod -Uri $searchUri -Headers $cfHeaders -ErrorAction Stop
 
             if ($search.data.Count -eq 0) {
-                Write-Warn "  Mod not found on CurseForge: $slug"
-                $failed.Add($slug)
+                Write-Warn "  Not found on CurseForge, trying Modrinth: $slug"
+                try {
+                    $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                    if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
+                    else { Write-Warn "  Not found anywhere: $slug"; $failed.Add($slug) }
+                } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
                 continue
             }
             $modId = $search.data[0].id
@@ -103,8 +120,12 @@ foreach ($url in $lines) {
             }
 
             if ($files.data.Count -eq 0) {
-                Write-Warn "  No files for $MC_VERSION : $slug"
-                $failed.Add($slug)
+                Write-Warn "  No CF files for $MC_VERSION, trying Modrinth: $slug"
+                try {
+                    $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                    if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
+                    else { Write-Warn "  Not found anywhere: $slug"; $failed.Add($slug) }
+                } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
                 continue
             }
 
@@ -119,12 +140,39 @@ foreach ($url in $lines) {
                 $dlUrl = "https://mediafilez.forgecdn.net/files/" + [int]($id / 1000) + "/" + ($id % 1000) + "/$fileName"
             }
 
-            # 4. Download
+            # 4. Download - fall back to Modrinth on 403
             $outPath = Join-Path $MODS_DIR $fileName
-            Invoke-WebRequest -Uri $dlUrl -OutFile $outPath -ErrorAction Stop
-            Write-Ok "  $fileName"
-            $success++
+            try {
+                Invoke-WebRequest -Uri $dlUrl -OutFile $outPath -ErrorAction Stop
+                Write-Ok "  $fileName"
+                $success++
+            } catch {
+                if ($_.Exception.Message -match '403') {
+                    Write-Warn "  CF blocked (403), trying Modrinth: $slug"
+                    try {
+                        $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                        if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
+                        else { Write-Warn "  Not on Modrinth either: $slug"; $failed.Add($slug) }
+                    } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
+                } else {
+                    Write-Err "  $slug - $($_.Exception.Message)"
+                    $failed.Add($slug)
+                }
+            }
 
+        } catch {
+            Write-Err "  $slug - $($_.Exception.Message)"
+            $failed.Add($slug)
+        }
+
+    # --- Modrinth ------------------------------------------------------------
+    } elseif ($url -match 'modrinth\.com/mod/([^/]+)') {
+        $slug = $Matches[1]
+        Write-Info "MR: $slug"
+        try {
+            $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+            if ($mrFile) { Write-Ok "  $mrFile"; $success++ }
+            else { Write-Warn "  No $MC_VERSION Fabric file: $slug"; $failed.Add($slug) }
         } catch {
             Write-Err "  $slug - $($_.Exception.Message)"
             $failed.Add($slug)

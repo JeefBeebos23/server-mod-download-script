@@ -44,6 +44,7 @@ https://www.curseforge.com/minecraft/mc-mods/colorize
 https://www.curseforge.com/minecraft/mc-mods/respect-my-trims
 https://www.curseforge.com/minecraft/mc-mods/basic-storage
 https://www.curseforge.com/minecraft/mc-mods/smelting-cobblestone-in-blast-a-furnace-fabric
+# many-more-ores-and-crafts depends on all-the-trims which is abandoned at 1.21 - may not load correctly
 https://www.curseforge.com/minecraft/mc-mods/many-more-ores-and-crafts
 https://www.curseforge.com/minecraft/mc-mods/nords-leaf-me-alone
 https://www.curseforge.com/minecraft/mc-mods/legacies-and-legends
@@ -88,8 +89,8 @@ https://www.curseforge.com/minecraft/mc-mods/puzzles-lib
 https://www.curseforge.com/minecraft/mc-mods/forge-config-api-port
 https://www.curseforge.com/minecraft/mc-mods/cloth-config
 https://www.curseforge.com/minecraft/mc-mods/bucketlib
-https://www.curseforge.com/minecraft/mc-mods/mcpitanlib
-https://www.curseforge.com/minecraft/mc-mods/all-the-trims
+https://modrinth.com/mod/mcpitanlibarch
+# all-the-trims removed - abandoned at 1.21, no 26.1.2 version exists
 https://www.curseforge.com/minecraft/mc-mods/lithostitched
 https://www.curseforge.com/minecraft/mc-mods/trim-patcher
 https://www.curseforge.com/minecraft/mc-mods/item-tooltips
