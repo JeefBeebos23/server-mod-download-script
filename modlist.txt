@@ -55,8 +55,8 @@ https://www.curseforge.com/minecraft/mc-mods/infinity-water-bucket
 https://www.curseforge.com/minecraft/mc-mods/exp-ore
 https://www.curseforge.com/minecraft/mc-mods/giant-cherry-blossom-bonsai-tree
 https://www.curseforge.com/minecraft/mc-mods/patpat
-https://www.curseforge.com/minecraft/mc-mods/echoes-of-the-end-structures
-https://www.curseforge.com/minecraft/mc-mods/rottenflesh-smelt-to-leather
+https://modrinth.com/mod/echoes-of-the-end-(-structures)
+https://modrinth.com/mod/rotten-flesh-smelt-to-leather
 https://www.curseforge.com/minecraft/mc-mods/item-alchemy-fabric
 https://www.curseforge.com/minecraft/mc-mods/serversleep
 https://www.curseforge.com/minecraft/mc-mods/big-lost-city

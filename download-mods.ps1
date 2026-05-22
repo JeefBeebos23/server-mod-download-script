@@ -20,7 +20,7 @@ function Write-Err    { param($m) Write-Host "  [XX] $m" -ForegroundColor Red }
 function Write-Info   { param($m) Write-Host "  [..] $m" -ForegroundColor Cyan }
 function Write-Header { param($m) Write-Host "`n--- $m ---" -ForegroundColor Blue }
 
-function Download-FromModrinth {
+function Get-ModrinthFile {
     param($slug, $outDir)
     $mrUri = "https://api.modrinth.com/v2/project/$slug/version" + "?game_versions=%5B%22$MC_VERSION%22%5D&loaders=%5B%22fabric%22%5D"
     $versions = Invoke-RestMethod -Uri $mrUri -ErrorAction Stop
@@ -101,7 +101,7 @@ foreach ($url in $lines) {
             if ($search.data.Count -eq 0) {
                 Write-Warn "  Not found on CurseForge, trying Modrinth: $slug"
                 try {
-                    $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                    $mrFile = Get-ModrinthFile -slug $slug -outDir $MODS_DIR
                     if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
                     else { Write-Warn "  Not found anywhere: $slug"; $failed.Add($slug) }
                 } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
@@ -122,7 +122,7 @@ foreach ($url in $lines) {
             if ($files.data.Count -eq 0) {
                 Write-Warn "  No CF files for $MC_VERSION, trying Modrinth: $slug"
                 try {
-                    $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                    $mrFile = Get-ModrinthFile -slug $slug -outDir $MODS_DIR
                     if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
                     else { Write-Warn "  Not found anywhere: $slug"; $failed.Add($slug) }
                 } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
@@ -150,7 +150,7 @@ foreach ($url in $lines) {
                 if ($_.Exception.Message -match '403') {
                     Write-Warn "  CF blocked (403), trying Modrinth: $slug"
                     try {
-                        $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+                        $mrFile = Get-ModrinthFile -slug $slug -outDir $MODS_DIR
                         if ($mrFile) { Write-Ok "  $mrFile (Modrinth)"; $success++ }
                         else { Write-Warn "  Not on Modrinth either: $slug"; $failed.Add($slug) }
                     } catch { Write-Err "  $slug - Modrinth: $($_.Exception.Message)"; $failed.Add($slug) }
@@ -170,7 +170,7 @@ foreach ($url in $lines) {
         $slug = $Matches[1]
         Write-Info "MR: $slug"
         try {
-            $mrFile = Download-FromModrinth -slug $slug -outDir $MODS_DIR
+            $mrFile = Get-ModrinthFile -slug $slug -outDir $MODS_DIR
             if ($mrFile) { Write-Ok "  $mrFile"; $success++ }
             else { Write-Warn "  No $MC_VERSION Fabric file: $slug"; $failed.Add($slug) }
         } catch {
